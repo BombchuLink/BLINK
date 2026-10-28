@@ -1,0 +1,28 @@
+configuration {
+	modi: 						"window,drun,ssh,combi";
+	font: 						"hack 10";
+	combi-modi: 				"window,drun,ssh";
+	font: 						"mono 12";
+	location: 					0;
+	yoffset: 					50;
+	xoffset: 					50;
+    height:                      590px;
+    width:                       1140px;
+    transparency:                "real";
+    fullscreen:                  false;
+    enabled:                     true;
+    cursor:                      "default";
+    spacing:                     0px;
+    padding:                     0px;
+    border:                      2px;
+    border-radius:               40px;
+    border-color:                @main-br;
+    background-color:            transparent;
+}
+
+
+
+
+
+
+@theme "dmenu"

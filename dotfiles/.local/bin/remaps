@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+# misc actions before starting
+setxkbmap -layout us -variant altgr-intl
+xset r rate 200 35
+killall xcape 2>/dev/null
+xmodmap ~/.config/Xmodmap
+
+# Manually map keys
+# They are mapped properly in the sourced xmodmap, but still cause issues if not mapped here.
+setxkbmap -option caps:super
+xmodmap -e 'keycode 23 = Alt_L Tab'
+xmodmap -e 'keycode 64 = Mode_switch'
+xmodmap -e 'keycode 78 = Hyper_R'
+xmodmap -e 'keycode 108= ISO_Level3_Shift'
+xmodmap -e 'keycode 135 = Hyper_L'
+
+# Clean out modifiers
+xmodmap -e 'clear mod1'
+xmodmap -e 'clear mod2'
+xmodmap -e 'clear mod3'
+xmodmap -e 'clear mod4'
+xmodmap -e 'clear mod5'
+
+# Map mods
+xmodmap -e 'add mod1 = Alt_L'
+xmodmap -e 'add mod1 = Meta_L'
+xmodmap -e 'add mod2 = Mode_switch'
+xmodmap -e 'add mod3 = Hyper_L'
+xmodmap -e 'add mod3 = Hyper_R'
+xmodmap -e 'add mod4 = Super_L'
+xmodmap -e 'add mod5 = ISO_Level3_Shift'
+
+# Fix errors from xmodmap assuming keycode of some modifiers
+xmodmap -e 'remove mod1 = Mode_switch'
+xmodmap -e 'remove mod5 = Mode_switch'
+
+
+# Map xcape binds
+xcape -e '#66-0=Escape'
+xcape -e 'Hyper_L=Super_L|Control_L|z;Hyper_R=Super_L|Shift_L|z'
+
+# Map Hyper_L and Hyper_R to tablet
+xsetwacom set "Wacom One by Wacom S Pen stylus" Button 2 "key +lhyper" ;
+xsetwacom set "Wacom One by Wacom S Pen stylus" Button 3 "key +rhyper"
+
+xmodmap ~/.config/Xmodmap
+
+pkill -USR1 -x sxhkd; pkill dwm; notify-send "restarted sxhkd"

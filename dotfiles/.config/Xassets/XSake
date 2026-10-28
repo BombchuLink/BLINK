@@ -1,0 +1,24 @@
+!! XSake
+*.color0:       #1A1D45
+*.color8:       #282858
+
+*.color1:       #304380
+*.color9:       #304380
+
+*.color2:       #4E609c
+*.color10:      #4E609c
+
+*.color3:       #8371ac
+*.color11:      #8371ac
+
+*.color4:       #ac7dac
+*.color12:      #ac7dac
+
+*.color5:       #cb86a4
+*.color13:      #cb86a4
+
+*.color6:       #e8a1a1
+*.color14:      #e8a1a1
+
+*.color7:       #ffd3b7
+*.color15:      #ffe0e0

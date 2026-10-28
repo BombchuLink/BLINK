@@ -1,0 +1,25 @@
+!! XBite
+*.color0:   #4f2d65
+*.color8:   #4f2d65
+
+*.color1:   #7b2e83
+*.color9:   #7b2e83
+
+*.color2:	#A23374
+*.color10:	#A23374
+
+*.color3:	#e76068
+*.color11:	#e76068
+
+*.color4:	#f47d7f
+*.color12:	#f47d7f
+
+*.color5:	#ffc589
+*.color13:	#ffc589
+
+*.color6:	#fdffa8
+*.color14:	#fdffa8
+
+*.color7:	#e7ffe4
+*.color15:	#e7ffe4
+

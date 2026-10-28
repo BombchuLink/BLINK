@@ -1,0 +1,9 @@
+!! ~/.config/Xassets/X_ASSET_HEAD
+st.opacity: 240
+st.font:Droid Sans Mono for Powerline: Font-10
+st.termname: st-256color
+st.borderpx: 8
+st.cursorshape: 6
+st.blinktimeout: 0
+dmenu.font:Droid Sans Mono for Powerline: Font-28
+Sxiv.background: #000000

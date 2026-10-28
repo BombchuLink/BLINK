@@ -1,0 +1,17 @@
+!! Charcoal Monochrome
+*.color0:  #0f0f0f
+*.color8:  #606060
+*.color1:  #707070
+*.color9:  #707070
+*.color2:  #808080
+*.color10: #808080
+*.color3:  #909090
+*.color11: #909090
+*.color4:  #a0a0a0
+*.color12: #a0a0a0
+*.color5:  #b0b0b0
+*.color13: #b0b0b0
+*.color6:  #c0c0c0
+*.color14: #c0c0c0
+*.color7:  #d8d8d8
+*.color15: #f8f8f8

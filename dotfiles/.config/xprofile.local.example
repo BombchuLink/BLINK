@@ -1,0 +1,17 @@
+#!/bin/sh
+# Copy to ~/.config/xprofile.local and adjust for this machine.
+# Sourced early by ~/.config/xprofile. Not tracked by BLINK.
+#
+# This is BLink's main desktop (NVIDIA, two 1080p monitors).
+
+LeftMonitor="HDMI-0"
+RightMonitor="DP-0"
+
+xrandr \
+  --output "$LeftMonitor"  --mode 1920x1080 --rate 60  --pos 0x0 \
+  --output "$RightMonitor" --mode 1920x1080 --rate 144 --pos 1920x0 --primary \
+  --dpi 96
+
+#set tablet
+#xsetwacom -v set "Wacom One by Wacom S Pen stylus" 'MapToOutput' 1920X1080+1920+0 &
+#xsetwacom -v set "Wacom One by Wacom S Pen stylus" 'PressureCurve' 20 20 100 100 &

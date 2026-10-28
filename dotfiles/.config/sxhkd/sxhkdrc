@@ -1,0 +1,64 @@
+#-- Utility
+
+# restart 
+super + shift + r 
+	pkill -USR1 -x sxhkd; pkill dwm; notify-send "restarted sxhkd"
+
+# Shutdown
+super + X
+	prompt "Shutdown computer?" "systemctl poweroff"
+# Logoout
+super + shift + Escape
+	changede
+# Close notif
+super + space
+	dunstctl close
+
+# Dropdown term
+#super + t
+#	scratch dropdown
+
+
+
+#-Alphabetical (you can map things to contol and shift + control, but I don't have enough binds to need it)
+super + a
+	$TERMINAL -e pulsemixer
+super + A
+	~/.config/scripts/audiodevice.in
+
+super + B
+	~/.config/scripts/togglepolybarmain
+
+super + C
+	dunstctl close
+
+
+super + g
+	pass show github/token | xclip -selection clipboard ; notify-send "copied github token to clipboard" ; sleep 5 ; echo "token_was_here" | xclip -selection clipboard; notify-send "clipboard cleared"
+
+super + G
+	~/.config/scripts/games
+#super + m
+#	~/.config/scripts/startncmpcpp
+super + alt + n
+	~/.config/nannybot/summon
+
+super + p
+	playerctl play-pause -p jellyfin-tui
+
+super + period
+	playerctl next -p jellyfin-tui
+super + comma
+	playerctl previous -p jellyfin-tui
+
+super + s
+	~/.config/scripts/savememe
+super + S
+	maim --format=png -s --hidecursor | tee ~/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png
+
+
+
+super + ctrl + z
+	xsetwacom set "Wacom One by Wacom S Pen stylus" 'MapToOutput' 1920X1080+0+0;
+super + shift + z
+	xsetwacom set "Wacom One by Wacom S Pen stylus" 'MapToOutput' 1920X1080+1920+0;

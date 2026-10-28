@@ -1,0 +1,165 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -v" \
+	mv="mv -iv" \
+	rm="rm -v" \
+	bat="cat /sys/class/power_supply/BAT?/capacity" \
+	mkd="mkdir -pv" \
+	8MB="$HOME/.config/scripts/8MB" \
+	yt="yt-dlp --add-metadata -i" \
+	ytd='yt-dlp -R infinite --restrict-filenames' \
+	ytd480="yt-dlp -f 'bestaudio+bestvideo[height<=480]' " \
+	yta="yt -x -f bestaudio/best --restrict-filenames" \
+	ytv="ytd -f 'bestvideo[height<=1080]' --restrict-filenames" \
+	ffmpeg="ffmpeg -hide_banner" \
+	org="wine $HOME/drives/tco/Music/ORG/Org210x.exe" \
+	#xdelta="xdelta3"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi"
+
+# random "temp" stuff
+alias \
+	cve="cd ~/drives/media/Games/CS/C_VE" \
+	cmb='cmake --build build --config Release' \
+	ge="game_english/CSE2" \
+
+
+#Configure dotfiles
+alias \
+	sd='~/.config/scripts' \
+	dd='dd status=progress' \
+	cf='cd ~/.config/ ; r' \
+	cfa='v ~/.config/aliasrc' \
+	cfbsp='v ~/.config/bspwm/bspwmrc' \
+	cfqu='v ~/.config/qutebrowser/config.py' \
+	cfd='v ~/.config/dunst/dunstrc' \
+	cfjft='v ~/.config/jellyfin-tui/config.yaml' \
+	cfi3='v ~/.config/i3/config' \
+	cfl='cd ~/.local/bin ; r' \
+	cfw='cd ~/.config/wallpaper ; r' \
+	cfm='cd ~/.config/mpv ; r' \
+	cfnb='cd ~/.config/nannybot' \
+	cfnc='v ~/.config/ncmpcpp/config' \
+	cfncb='v ~/.config/ncmpcpp/bindings' \
+	cfpb='v ~/.config/polybar/config' \
+	cfpbs='v ~/.config/i3/polybar.sh' \
+	cfpc='v ~/.config/picom.conf' \
+	cfr='v ~/.config/ranger/rc.conf' \
+	cfro='cd ~/.config/rofi; r' \
+	cfrf='v ~/.config/ranger/rifle.conf' \
+	cfrm='v ~/.local/bin/remaps' \
+	cfdwm='cd ~/repos/dwm_blink' \
+	cfs='cd ~/.config/sfx; r' \
+	cfsx='v ~/.config/sxhkd/sxhkdrc' \
+	cfsxi3='v ~/.config/sxhkd/sxhkdrc_i3' \
+	cfv='cd ~/.config/nvim/lua/BLink; nvim .' \
+	cfxi='v ~/.xinitrc' \
+	cfxp='v ~/.config/xprofile' \
+	cfxr='cd ~/.config/Xassets; r' \
+	cfxa='cd ~/.config/Xassets; r' \
+	cfxm='v ~/.config/Xmodmap' \
+	cfz='v ~/.config/zsh/.zshrc' \
+	cfzd='cd ~/.config/zsh/; r' \
+	:q="exit" \
+	sfx="cd ~/.config/sfx; r" \
+
+# ""Common"" aliases
+alias \
+	~='cd ~' \
+	c="clear" \
+	cl="(nohup xst >/dev/null 2>&1 & disown &>/dev/null)" \
+	bt="bluetuith" \
+	cll="(nohup xst >/dev/null 2>&1 & disown &>/dev/null)" \
+	e="$EDITOR" \
+	f="$FILE" \
+	g="git" \
+	p="sudo pacman" \
+	q="exit" \
+	r='ranger' \
+	t='transmission-remote' \
+	v="$EDITOR" \
+	..='cd ..' \
+	ka="killall" \
+	PS1='[\u@\h \W]\$ ' \
+	sdn="sudo shutdown -h now" \
+	ranger='ranger --choosedir=$HOME/.cache/rangerdir; LASTDIR=`cat $HOME/.cache/rangerdir`; cd "$LASTDIR"' \"
+
+# Aliases
+alias \
+	m='make BLINK=1 && ./tw' \
+	md='make DEBUG=1 BLINK=1 && ./tw' \
+	ces='cd ~/drives/tco/Games/CoralEngine; v src' \
+	ce='cd ~/drives/tco/Games/CoralEngine' \
+	la='ls -A' \
+	gs="xrandr | grep '^[^\" \"]' | grep 'connected' | sed 's/ /\t/g' | tail -n+2 | sed -r 's/(([^\t]*\t){3}).*/\1/' " \
+	gas="xrandr | grep '^[^\" \"]' | grep -v 'disconnected' | sed 's/ /\t/g' | tail -n+2 | sed -r 's/(([^\t]*\t){3}).*/\1/' | grep -v normal | grep -v primary" \
+	gcs="xrandr | grep '^[^\" \"]' | grep -v 'disconnected' | sed 's/ /\t/g' | tail -n+2 | sed -r 's/(([^\t]*\t){3}).*/\1/' " \
+	mu='cd ~/drives/media/Music/1_LibraryMusic' \
+	wk='i3-msg workspace' \
+	sh="~/.config/scripts/ScriptHelp" \
+	unzip="~/.config/scripts/plsunzip" \
+	unzipall="~/.config/scripts/plsunzipall" \
+	plszip="~/.config/scripts/plszip" \
+	pls7z="~/.config/scripts/pls7zip" \
+	pls7z="~/.config/scripts/plszip" \
+	nb="v ~/.local/bin/nannybot" \
+	ta='transmission-remote -a' \
+	tl='transmission-remote -l' \
+	ts='transmission-remote --torrent' \
+	art='cd ~/drives/media/Videos/Art\ Videos; r' \
+	bcd='bandcamp-dl' \
+	cdd=" cd ~/drives/media/Documentation" \
+	lxm='xmodmap ~/.config/Xmodmap' \
+	lsu='lsblk -o +UUID' \
+	mud='cd ~/drives/media/Music/2_Downloaded\ Singles' \
+	tor="cd ~/drives/data/Torrents" \
+	tlm='/opt/bin/LeftMonitorTablet' \
+	trm='/opt/bin/RightMonitorTablet' \
+	twi='cd $HOME/drives/media/Twitter ; r' \
+	vid='cd $HOME/drives/media/Videos/YoutubeVideos' \
+	web='cd $HOME/drives/tco/websites' \
+	wkm='i3-msg move container to workspace' \
+	xrl='xrdb ~/.config/XResources' \
+	ytm='cd $HOME/drives/media/Music/2_Downloaded\ Singles' \
+	ytp='cd $HOME/drives/media/Videos/YTP' \
+	todo='v ~/drives/tco/Docs/todo.txt' \
+	kart='cd $HOME/drives/media/Games/PC\ games/SRB2Kart; r' \
+	lore='cd ~/drives/tco/Lore' \
+	meme='cd ~/drives/media/Memes' \
+	pass='cd ~/drives/media/Documentation/pass\ backup' \
+	soul='cd $HOME/drives/media/Music/SoulSeek ; r' \
+	pict='cd $HOME/drives/media/Pictures' \
+	wiki='cd /srv/http/wiki ; r' \
+	startwiki='sudo systemctl start httpd.service' \
+	rewiki='sudo systemctl restart httpd.service' \
+	games='cd ~/drives/media/Games' \
+	untarxz='tar zf' \
+	untargz='tar xzf' \
+	xmml='xmodmap ~/.config/Xmodmap' \
+	artvid='cd $HOME/drives/media/Videos/Art\ Videos' \
+	weath="less -S ~/.local/share/weatherreport" \
+	magit="nvim -c MagitOnly" \
+	agenda='v ~/drives/tco/Docs/agenda.txt' \
+	scripts='cd ~/.config/scripts' \
+	MonTabL='~/.config/scripts/LeftMonitorTablet' \
+	MonTabR='~/.config/scripts/RightMonitorTablet' \
+	charget='~/.config/scripts/character' \
+	gapset='i3-msg gaps inner all set' \
+	story='cd ~/drives/media/Books/My\ Stories' \
+	suebot='python3 ~/repos/SueBot/SueBot.py' \
+	timer=' date1=`date +%s`; c ; while true; do echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r"; done' \
+	melee480='function _meleeffmpeg() { ffmpeg -i $1.mp4 -filter:v 'crop=iw-608,scale=584:480' -crf 23 $1_conv.mp4};  _meleeffmpeg' \
+	melee720='function _meleeffmpeg() { ffmpeg -i $1.mp4 -filter:v 'crop=iw-608,scale=876:720' $1_conv.mp4};  _meleeffmpeg' \
+	meleebad='function _meleeffmpeg() { ffmpeg -i $1.mp4 -filter:v 'crop=iw-608,scale=876:720' -c:v libx264 -preset veryslow -rf 40 -b:a 32k -filter:a volume=55 $1_conv.mp4};  _meleeffmpeg' \
+	tablet='~/.local/bin/tablet' \
+	sourcenvm='source /usr/share/nvm/init-nvm.sh' \

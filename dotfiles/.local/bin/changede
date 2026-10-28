@@ -1,0 +1,11 @@
+#!/bin/zsh
+#choice=$(echo -e "i3\nbspwm" | dmenu -i -p "Choose DE to reboot into")
+#echo "$choice" > ~/.config/wm
+choice=$(echo -e "Yes\nNo" | dmenu -i -p "logout now?")
+if [ $choice = Yes ]; then
+	killall -p dwm
+fi
+
+
+
+

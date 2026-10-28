@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#prompt password plz
+
+dmenu -p "$1" <&-

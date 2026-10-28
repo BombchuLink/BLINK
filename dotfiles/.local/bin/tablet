@@ -1,0 +1,11 @@
+#!/bin/sh
+
+xsetwacom set "Wacom One by Wacom S Pen stylus" 'MapToOutput' 1920X1080+0+0;
+xsetwacom set "Wacom One by Wacom S Pen stylus" Button 2 "key +super +ctrl z -super -ctrl";
+xsetwacom set "Wacom One by Wacom S Pen stylus" Button 3 "key +super +shift z -super -shift";
+#xsetwacom set "Wacom One by Wacom S Pen stylus" Button 2 "key +lhyper";
+#xsetwacom set "Wacom One by Wacom S Pen stylus" Button 3 "key +rhyper";
+
+xsetwacom set "Wacom One by Wacom S Pen stylus" Rotate none;
+
+#xsetwacom set "Wacom One by Wacom S Pen stylus" PressureCurve 0 0 100 100

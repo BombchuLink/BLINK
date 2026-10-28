@@ -1,0 +1,242 @@
+[colors]
+color0	= ${xrdb:color0}
+color1	= ${xrdb:color1}
+color2	= ${xrdb:color2}
+color3	= ${xrdb:color3}
+color4	= ${xrdb:color4}
+color5	= ${xrdb:color5}
+color6	= ${xrdb:color6}
+color7	= ${xrdb:color7}
+color8	= ${xrdb:color8}
+gray	= #707080
+white	= #E0F0E0
+
+
+[bar/main]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+height = 18
+width = 100%:-12
+offset-y = 0
+offset-x = 0
+radius = 5
+border-size = 3
+wm-restack = dwm
+override-redirect = false
+background = ${colors.color0}
+foreground = ${colors.color7}
+font-0 = Droid Sans Mono for Powerline:size=10;2
+font-1 = Font Awesome 6 Free Solid:style=Solid:size=8;1
+font-2 = Font Awesome 6 Brands:size=8;3
+font-3 = Source Han Sans JP Medium:size=9;3
+border-color = ${colors.color0}
+modules-left = s dwm
+modules-center = music
+modules-right = vol date time bot network vpn
+
+[bar/second]
+monitor = ${env:MONITOR:}
+enable-ipc = true
+height = 18
+width = 100%
+offset-y = 0
+offset-x = 0
+#radius = 5
+border-size = 3
+wm-restack = dwm
+override-redirect = false
+background = ${colors.color0}
+foreground = ${colors.color7}
+font-0 = Droid Sans Mono for Powerline:size=10;2
+font-1 = Font Awesome 6 Free Solid:style=Solid:size=8;1
+font-2 = Font Awesome 6 Brands:size=8;3
+font-3 = Source Han Sans JP Medium:size=9;3
+border-color = ${colors.color0}
+modules-left = s dwm
+modules-center = music
+modules-right = vol date time network vpn 
+
+
+[module/s]
+type = custom/text
+content = "%{T4}   %{T-}"
+content-background = ${colors.color0}
+
+[module/wtitle]
+type = internal/xwindow
+label = "%title% "
+label-empty = "Desktop "
+label-maxlen = 40
+
+[module/dwm]
+type = internal/dwm
+pin-workspaces = true
+format = <label-tags>
+
+# active tag on focused mon
+label-focused = %name%
+label-focused-padding = 0
+label-focused-background = ${colors.color0}
+label-focused-foreground = ${colors.color6}
+
+# inactive tag on focused mon
+label-visible = %name%
+label-visible-background = ${colors.color0}
+label-visible-foreground = ${colors.color7}
+
+# active tag on unfocused mon
+label-unfocused = %name%
+label-unfocused-background = ${colors.color0}
+label-unfocused-foreground = ${colors.color3}
+
+# unocupied, unfocused workspace on any mon
+label-empty = ""
+label-empty-padding = 0
+label-empty-background = ${colors.color0}
+label-empty-foreground = ${colors.color2}
+
+# tag with urgency hint set
+label-urgent = %name%
+label-urgent-background = ${colors.color0}
+label-urgent-foreground = #FF5050
+
+# seperator for tags
+label-separator = " "
+label-separator-padding = 0
+label-separator-background = ${colors.color0}
+label-separator-foreground = ${colors.color2}
+
+
+
+[module/music]
+type = custom/script
+exec = sh -c 'playerctl -p jellyfin-tui metadata --format " {{ artist }} - {{ title }} " 2>/dev/null || echo "  Offline "'
+exec-if = sh -c 'playerctl -l >/dev/null 2>&1'
+interval = 1
+tail = false
+
+; styling (kept from yours)
+label-foreground = ${colors.color0}
+label-background = ${colors.color7}
+
+format-foreground = ${colors.color0}
+format-background = ${colors.color7}
+
+; offline styling
+format-fail = <label-fail>
+label-fail = "  Offline "
+label-fail-foreground = ${colors.color0}
+label-fail-background = ${colors.color15}
+
+
+
+[module/vol]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+format-volume = <label-volume>
+format-muted = <label-muted>
+label-muted = "  Muted "
+label-volume = "  %percentage%% "
+format-volume-background = ${colors.color0}
+format-volume-foreground = ${colors.color15}
+format-muted-background = ${colors.color0}
+format-muted-foreground = ${colors.color15}
+
+[module/network]
+type = internal/network
+interface = enp30s0
+label-disconnected = "NA"
+label-connected = " "
+#label-connected = "  %local_ip% "
+label-connected-background = ${colors.color0}
+label-connected-foreground = ${colors.color15}
+label-disconnected-background = ${colors.color0}
+label-disconnected-foreground = ${colors.color15}
+
+[module/vpn]
+type = custom/script
+exec = echo " [VPN]"
+exec-if = test -f ~/.config/scripts/VPNON
+format-foreground = ${colors.color15}
+format-background = ${colors.color0}
+format-padding = 0
+interval = 5
+
+[module/mountdrive]
+type = custom/ipc
+lable-active = %token%
+lable-active-font = 4
+hook-0 = if test -f ~/.config/scripts/HolyMount; then echo "M"; fi
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 1
+initial = 1
+
+[module/bot]
+type = custom/script
+exec = echo " "
+exec-if = test -f ~/.config/nannybot/is.running
+format-foreground = ${colors.color15}
+format-background = ${colors.color0}
+format-padding = 0
+interval = 5
+
+[module/sue]
+type = custom/script
+exec = echo " "
+exec-if = pgrep -cf SueBot2.py
+format-foreground = ${colors.color15}
+format-background = ${colors.color0}
+format-padding = 0
+interval = 5
+
+[module/keymode]
+type = custom/ipc
+lable-active = %token%
+lable-active-font = 4
+hook-0 = if test -f ~/.config/scripts/keysmirror; then echo "%{T}MIRROR"; elif test -f ~/.config/scripts/keyshot; then echo "HOTKEY"; else echo "%{T}NORMAL"; fi
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 1
+initial = 1
+
+[module/keygroup]
+type = custom/ipc
+lable-active = %token%
+lable-active-font = 4
+hook-0 = grouplevel=$(xkslags -i); echo "[$grouplevel] "
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 0
+initial = 1
+
+[module/i3mode]
+type = custom/ipc
+lable-active = %token%
+lable-active-font = 4
+hook-0 = if [ -f ~/.config/sxhkd/is.star ] ; then echo "# "; else echo "- "; fi
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 0
+initial = 1
+
+[module/keys]
+type = custom/ipc
+# when sleep is fast, it can cause issues to where the text file is blank sometimes
+hook-0 = string=$(<~/.config/scripts/keys_held); if [ ${#string} -eq 15 ] ; then cat ~/.config/scripts/keys_held; else echo "_ _ __ __ _ _ _"; fi
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 1
+initial = 1
+
+[module/date]
+type = internal/date
+format-foreground = ${colors.color15}
+format-background = ${colors.color0}
+date = "  %a, %b %d "
+
+[module/time]
+type = internal/date
+format-foreground = ${colors.color15}
+format-background = ${colors.color0}
+date = " %H:%M "

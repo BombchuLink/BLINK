@@ -1,0 +1,33 @@
+#!/bin/bash
+
+url=$(xclip -o -selection clipboard)
+
+if [[ ! $url =~ ^https?:// ]]; then
+    mpv ~/.config/sfx/S1Death.wav & exit 1
+fi
+
+cd ~/drives/media/Memes/unsorted
+
+if command -v wget >/dev/null 2>&1; then
+    downloaded_file=$(wget --content-disposition "$url" 2>&1 | grep -oP 'Saving to: ‘\K[^’]+')
+    clean_filename="${downloaded_file%%\?*}"
+    
+	# Check if there is file with same name (looking at you video0.mov)
+    base_name="${clean_filename%.*}"
+    extension="${clean_filename##*.}"
+    counter=1
+    new_filename="$clean_filename"
+    
+    while [[ -e "$new_filename" ]]; do
+        new_filename="${base_name}_${counter}.${extension}"
+        counter=$((counter + 1))
+    done
+    
+    mv -n "$downloaded_file" "$new_filename"
+else
+    notify-send "wget fail??"
+    exit 1
+fi
+
+# Play a sound to indicate success
+mpv ~/.config/sfx/TTYD\ Menu\ Pullup.wav &

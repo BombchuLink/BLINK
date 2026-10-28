@@ -1,0 +1,25 @@
+!! XBlaze
+*.color0:   #1B092f
+*.color8:   #2A1140
+
+*.color1:   #361751
+*.color9:   #361751
+
+*.color2:   #582c7c
+*.color10:  #582c7c
+
+*.color3:   #7742a4
+*.color11:  #7742a4
+
+*.color4:   #9954cf
+*.color12:  #9954cf
+
+*.color5:   #d571ef
+*.color13:  #d571ef
+
+*.color6:   #e29beb
+*.color14:  #e29beb
+
+*.color7:   #ffe1ff
+*.color15:  #ffe1ff
+

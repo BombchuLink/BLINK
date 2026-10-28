@@ -1,0 +1,8 @@
+{
+  "inlayHint.enable": false,
+  "inlayHint.display": false,
+  "inlayHint.enableParameter": false,
+  "suggest.noselect": true,
+
+  "clangd.arguments": ["-I/usr/include/SDL2"]
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+for f in *.zip *.7z; do
+    ~/.config/scripts/plsunzip "$f"
+done

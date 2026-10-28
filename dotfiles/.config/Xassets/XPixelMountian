@@ -1,0 +1,24 @@
+!! XPixelMountian
+*.color0:   #0e0d1b
+*.color8:   #0e0d1b
+
+*.color1:   #161a1d
+*.color9:   #161a1d
+
+*.color2:	#142036
+*.color10:	#142036
+
+*.color3:	#103442
+*.color11:	#103442
+
+*.color4:	#4f4f45
+*.color12:	#4f4f45
+
+*.color5:	#a65d4c
+*.color13:	#a65d4c
+
+*.color6:	#c58464
+*.color14:	#c58464
+
+*.color7:	#e4b28b
+*.color15:	#e4b28b

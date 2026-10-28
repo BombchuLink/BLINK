@@ -1,0 +1,13 @@
+#!/bin/bash
+base="${1%.*}"
+tmpdir=$(mktemp -d)
+7z x "$1" -o"$tmpdir"
+
+# check if single top-level dir
+contents=("$tmpdir"/*)
+if [[ ${#contents[@]} -eq 1 && -d "${contents[0]}" ]]; then
+    mv "${contents[0]}" "./$base"
+else
+    mv "$tmpdir" "./$base"
+fi
+rm -rf "$tmpdir"

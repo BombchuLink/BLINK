@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ranger
+Comment=Opens a directory in the ranger file manager
+Icon=utilities-terminal
+Terminal=false
+Exec=xst -e ranger %f
+MimeType=inode/directory;

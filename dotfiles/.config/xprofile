@@ -1,0 +1,80 @@
+#!/bin/sh
+# Sourced by ~/.xinitrc. Must stay POSIX sh (Debian's /bin/sh is dash).
+
+# Must come first: D-Bus-activated services (dunst for remaps' notify-send,
+# gtk portal) need DISPLAY, or they fail and notify-send blocks for ~75s
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
+###---===MACHINE SPECIFIC===---###
+
+# Monitor layout, tablet mapping, etc. live in ~/.config/xprofile.local, which
+# is NOT part of the dotfiles (see dotfiles/.config/xprofile.local.example).
+hsetroot -solid "#000000"
+[ -f "$HOME/.config/xprofile.local" ] && . "$HOME/.config/xprofile.local"
+
+
+###---===XRESOURCE===---###
+
+xrdb "$HOME/.config/XResources"	# compiled by changepaper from ~/.config/Xassets
+
+
+###---===KEYBOARD===---###
+
+#enable ISO_Level3_Shift/AltGR key but don't enable dead keys
+setxkbmap -layout us -variant altgr-intl
+
+#turn off caps lock if it accidentally got turned on at some point during boot/bios.
+#must run before remaps/sxhkd: setxkbmap resets the modifier map, which leaves sxhkd's grabs stale
+setxkbmap -option caps:none
+
+#remap keys to good keys
+remaps
+
+#set keyboard stop rate
+xset r rate 200 35 &
+
+#set idle screen black to off
+xset s off -dpms &
+
+
+###---===DAEMONS/BACKGROUND SCRIPTS===---###
+
+sxhkd &	# set hotkeys
+unclutter --jitter 10 --timeout 2 --ignore-scrolling &
+"$HOME/.config/scripts/clipmanager.sh" &
+
+eval "$(gnome-keyring-daemon --start)"
+export SSH_AUTH_SOCK
+
+#disable default key actions for keys 8 and 9 on mouse to allow remapping
+ID=$(xinput list | grep 'MOUSE  ' | awk '{print $6}' | cut -d'=' -f 2)
+[ -n "$ID" ] && xinput --set-button-map "$ID" 1 2 3 4 5 6 7 0 0
+
+#some variables that need to be set
+export TERM=xst
+export TERMINAL=$TERM
+export EDITOR=nvim
+export MEDNAFEN_HOME="$HOME/.config/mednafen"
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+
+# set paper (changepaper keeps the current one at ~/.config/wall.png)
+if [ -f "$HOME/.config/wall.png" ]; then
+	feh --no-fehbg --bg-scale "$HOME/.config/wall.png" &
+else
+	feh --no-fehbg --bg-scale "$HOME/.config/wallpaper/wall_Marisa.png" &
+fi
+
+redshift -l 44.05:-123.09 -t 6500:2500 &
+dunst &
+[ -x "$HOME/.config/nannybot/nannybot" ] && "$HOME/.config/nannybot/nannybot" &		# start NannyBot
+
+#play startup sound if mpd isn't playing
+if ! mpc 2>/dev/null | grep -q playing; then
+	pulsemixer --set-volume 50 &	# for some reason it's always set to 6% on boot...
+	mpv --no-video "$HOME/.config/sfx/Startup.wav" >/dev/null 2>&1 &
+fi
+
+# restart song because mpd is wack on shuffle between power on/off
+mpc seek 0 >/dev/null 2>&1
+
+xcompmgr &
