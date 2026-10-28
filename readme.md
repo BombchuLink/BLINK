@@ -2,7 +2,7 @@ BLINK's LARBS is not Kempt (BLINK) is a auto deployment script for debian that i
 
 BLINK includes
 
-BLink's  custom daemon.
+BLink's custom daemon.
 https://github.com/BombchuLink/NannyBot
 
 BLink's dwm build
@@ -11,7 +11,7 @@ https://github.com/BombchuLink/dwm
 xkslags
 https://github.com/BombchuLink/xkslags
 
-Blink's build of xst
+BLink's build of xst
 https://github.com/BombchuLink/xst
 
 polybar dwm
@@ -28,7 +28,7 @@ cd BLINK
 ./blink.sh -u <user>
 ```
 
-Then log in as that user on tty1 and X starts automatically (`~/.config/zsh/.zprofile` runs `startx`).
+Then log in as that user on tty1. The X environment will start automatically. 
 
 Options: `-p PASS` password for a new user, `-y` no prompts, `-s` skip the slow polybar build, `-r URL -b BRANCH` take dotfiles from another clone. It's safe to re-run; dotfiles it overwrites are moved to `~/.blink-backup-<date>/`.
 
@@ -49,4 +49,4 @@ Per-machine things (monitor layout, tablet) go in `~/.config/xprofile.local`. Se
 ## License
 
 [MIT-0](LICENSE): do whatever you want with it, no attribution needed.
-The wallpapers and sound effects in `dotfiles/.config/` belong to their original creators and aren't covered by it.
+The wallpapers and sound effects in `dotfiles/.config/` belong to their original creators... obviously.
