@@ -307,6 +307,20 @@ fi
 rmmod pcspkr 2>/dev/null
 echo "blacklist pcspkr" >/etc/modprobe.d/nobeep.conf
 
+# Dark red GRUB menu instead of Debian's blue (overrides 05_debian_theme;
+# in GRUB's palette "red" is the dark one, "light-red" the bright one)
+if [ -d /etc/grub.d ]; then
+	cat >/etc/grub.d/06_dark_red_theme <<'EOF'
+#!/bin/sh
+cat <<'GRUBEOF'
+set menu_color_normal=light-gray/red
+set menu_color_highlight=red/light-gray
+GRUBEOF
+EOF
+	chmod 755 /etc/grub.d/06_dark_red_theme
+	update-grub >/dev/null 2>&1 || fail "update-grub (dark red theme)"
+fi
+
 # Commands the dotfiles run through `sudo -n` / hotkeys without a password
 cat >/etc/sudoers.d/blink-cmds <<EOF
 %sudo ALL=(ALL:ALL) NOPASSWD: /usr/sbin/shutdown,/usr/sbin/reboot,/usr/bin/mount,/usr/bin/umount,/usr/bin/loadkeys,/usr/bin/nmtui
