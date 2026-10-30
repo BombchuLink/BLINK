@@ -25,6 +25,8 @@
 ,redshift,"warms the screen at night."
 ,maim,"takes screenshots."
 ,gnome-keyring,"stores secrets for the session."
+,libglib2.0-bin,"provides gsettings for the dark theme setting."
+,dconf-gsettings-backend,"stores gsettings values so they stick between logins."
 ,dbus-x11,"connects the X session to dbus."
 ,dbus-user-session,"runs the dbus user session."
 ,zsh,"is the default shell."

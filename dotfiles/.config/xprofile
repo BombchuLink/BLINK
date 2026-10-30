@@ -5,6 +5,14 @@
 # gtk portal) need DISPLAY, or they fail and notify-send blocks for ~75s
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
+###---===THEME===---###
+
+# Dark mode for GTK4/libadwaita apps and anything that asks for the system
+# color scheme (LibreWolf menus). GTK3 reads ~/.config/gtk-3.0/settings.ini.
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark 2>/dev/null
+gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark 2>/dev/null
+
+
 ###---===MACHINE SPECIFIC===---###
 
 # Monitor layout, tablet mapping, etc. live in ~/.config/xprofile.local, which

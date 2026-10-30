@@ -48,6 +48,7 @@ include='
 .config/gtk-2.0
 .config/gtk-3.0/settings.ini
 .config/gtk-3.0/gtk.css
+.config/gtk-4.0/settings.ini
 .config/fontconfig
 .config/btop/btop.conf
 .config/sxiv
