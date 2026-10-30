@@ -36,7 +36,7 @@ setxkbmap -layout us -variant altgr-intl
 setxkbmap -option caps:none
 
 #remap keys to good keys
-remaps
+remaps -q
 
 #set keyboard stop rate
 xset r rate 200 35 &

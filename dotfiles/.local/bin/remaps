@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+# -q: don't send the "restarted sxhkd" notification (used on boot by xprofile)
+[ "$1" = "-q" ] && quiet=1
+
 # misc actions before starting
 setxkbmap -layout us -variant altgr-intl
 xset r rate 200 35
@@ -40,4 +43,5 @@ xsetwacom set "Wacom One by Wacom S Pen stylus" Button 3 "key +rhyper"
 
 xmodmap ~/.config/Xmodmap
 
-pkill -USR1 -x sxhkd; pkill dwm; notify-send "restarted sxhkd"
+pkill -USR1 -x sxhkd; pkill dwm
+[ -n "$quiet" ] || notify-send "restarted sxhkd"
