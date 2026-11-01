@@ -32,7 +32,7 @@ font-3 = Source Han Sans JP Medium:size=9;3
 border-color = ${colors.color0}
 modules-left = s dwm
 modules-center = music
-modules-right = vol date time bot network vpn
+modules-right = swallow vol date time bot network vpn
 
 [bar/second]
 monitor = ${env:MONITOR:}
@@ -54,7 +54,7 @@ font-3 = Source Han Sans JP Medium:size=9;3
 border-color = ${colors.color0}
 modules-left = s dwm
 modules-center = music
-modules-right = vol date time network vpn 
+modules-right = swallow vol date time network vpn 
 
 
 [module/s]
@@ -161,6 +161,15 @@ format-foreground = ${colors.color15}
 format-background = ${colors.color0}
 format-padding = 0
 interval = 5
+
+[module/swallow]
+type = custom/ipc
+# dwm sets _DWM_SWALLOW on the root window and runs "polybar-msg action swallow hook 0" on toggle (super+alt+s)
+hook-0 = if xprop -root -notype _DWM_SWALLOW 2>/dev/null | grep -q '= 0$'; then echo "%{F#707080} %{F-}"; else echo " "; fi
+format-background = ${colors.color0}
+format-foreground = ${colors.color15}
+format-padding = 0
+initial = 1
 
 [module/mountdrive]
 type = custom/ipc
