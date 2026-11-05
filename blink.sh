@@ -307,30 +307,27 @@ fi
 rmmod pcspkr 2>/dev/null
 echo "blacklist pcspkr" >/etc/modprobe.d/nobeep.conf
 
-# Dark red GRUB menu instead of Debian's blue (overrides 05_debian_theme).
-# GRUB's darkest palette red is still bright (#a80000), so the dark red is a
-# solid background image; "black" is transparent over it. Falls back to the
-# palette red on a text-mode console, where images can't be shown.
+# Black GRUB menu with dark red text instead of Debian's blue (overrides
+# 05_debian_theme). The black is a solid background image so a theme image
+# from 05_debian_theme can't show through ("black" is transparent over an
+# image). "red" (#a80000) is the darkest red in GRUB's 16-colour palette.
 if [ -d /etc/grub.d ]; then
-	r=50 g=00 b=00	# hex RGB of the background
+	rm -f /etc/grub.d/06_dark_red_theme /boot/grub/blink-dark-red.tga	# old theme
+	r=000 g=000 b=000	# octal RGB of the background (octal: dash printf has no \x)
 	{ printf '\0\0\2\0\0\0\0\0\0\0\0\0\20\0\20\0\30\0'	# 16x16 24-bit uncompressed TGA
-	  for _ in $(seq 256); do printf "\x$b\x$g\x$r"; done; } >/boot/grub/blink-dark-red.tga
-	cat >/etc/grub.d/06_dark_red_theme <<'EOF'
+	  for _ in $(seq 256); do printf "\\$b\\$g\\$r"; done; } >/boot/grub/blink-black.tga
+	cat >/etc/grub.d/06_blink_theme <<'EOF'
 #!/bin/sh
 cat <<'GRUBEOF'
 insmod tga
-if background_image "${prefix}/blink-dark-red.tga"; then
-	set color_normal=light-gray/black
-	set menu_color_normal=light-gray/black
-	set menu_color_highlight=red/light-gray
-else
-	set menu_color_normal=light-gray/red
-	set menu_color_highlight=red/light-gray
-fi
+if background_image "${prefix}/blink-black.tga"; then true; fi	# quiet on a text console
+set color_normal=red/black
+set menu_color_normal=red/black
+set menu_color_highlight=black/red
 GRUBEOF
 EOF
-	chmod 755 /etc/grub.d/06_dark_red_theme
-	update-grub >/dev/null 2>&1 || fail "update-grub (dark red theme)"
+	chmod 755 /etc/grub.d/06_blink_theme
+	update-grub >/dev/null 2>&1 || fail "update-grub (black/red theme)"
 fi
 
 # Commands the dotfiles run through `sudo -n` / hotkeys without a password
