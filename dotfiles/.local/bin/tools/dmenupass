@@ -1,5 +1,5 @@
 #!/bin/sh
 
-#prompt password plz
+# SUDO_ASKPASS prompt: -P shows dots instead of the typed password.
 
-dmenu -p "$1" <&-
+dmenu -P -p "$1" <&-
