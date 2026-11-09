@@ -307,10 +307,10 @@ fi
 rmmod pcspkr 2>/dev/null
 echo "blacklist pcspkr" >/etc/modprobe.d/nobeep.conf
 
-# Black GRUB menu with dark red text instead of Debian's blue (overrides
+# Black GRUB menu with light red text instead of Debian's blue (overrides
 # 05_debian_theme). The black is a solid background image so a theme image
 # from 05_debian_theme can't show through ("black" is transparent over an
-# image). "red" (#a80000) is the darkest red in GRUB's 16-colour palette.
+# image). "light-red" (#fe5454) is the lighter of GRUB's two palette reds.
 if [ -d /etc/grub.d ]; then
 	rm -f /etc/grub.d/06_dark_red_theme /boot/grub/blink-dark-red.tga	# old theme
 	r=000 g=000 b=000	# octal RGB of the background (octal: dash printf has no \x)
@@ -321,9 +321,9 @@ if [ -d /etc/grub.d ]; then
 cat <<'GRUBEOF'
 insmod tga
 if background_image "${prefix}/blink-black.tga"; then true; fi	# quiet on a text console
-set color_normal=red/black
-set menu_color_normal=red/black
-set menu_color_highlight=black/red
+set color_normal=light-red/black
+set menu_color_normal=light-red/black
+set menu_color_highlight=black/light-red
 GRUBEOF
 EOF
 	chmod 755 /etc/grub.d/06_blink_theme
